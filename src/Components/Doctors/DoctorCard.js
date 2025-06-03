@@ -87,7 +87,7 @@ function Doctor({ card }) {
       </Link>
       <div className="row commentRow">
         <div className="col col-sm-12 col-md-6">
-          <p>Ratings: {comment.comments.length > 0 ? rating(comment.comments): null}</p>
+          <p>Ratings: {comment.comments ? rating(comment.comments): null}</p>
           <StarRating
                   percentage={comment.comments ? rating(comment.comments) / 5 : 5 / 5}
                 />
