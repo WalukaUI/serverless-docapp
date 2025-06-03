@@ -28,40 +28,21 @@ function MainWithAuth({user, setUser}) {
   const userRole = localStorage.getItem("role");
   localStorage.setItem("email", auth.user?.profile.email);
 
-  const contextValue = {
-    user,
-    doctors,
-    locations,
-  };
-
   // auto-login----------------------
-  useEffect(() => {
-    // setUser({
-    //     "id": "2",
-    //     "first_name": "Enrique",
-    //     "last_name": "Hamill",
-    //     "email": "arvilla@mitchell.example",
-    //     "contact_number": "0",
-    //     "clinic_location": "8",
-    //     "role": "patient",
-    //     "username": "jonah",
-    //     "password_digest": "Heard Island and McDonald Islands",
-    //     "patient": true
-    // })
+  useEffect(() => { 
     fetch(BASE_URL + `/patients`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": auth.user?.access_token },
+      headers: { "Content-Type": "application/json", "Authorization": auth.user?.access_token},
       body: JSON.stringify({"email": `${auth.user?.profile.email}`}),
     }).then((r)=>{
-      console.log(r);
       if(r.ok){
         r.json().then((user)=>{
-          console.log(user);
-          setUser();
+          setUser(user.body);
         })
       }
     })
-  });
+
+   },[]);
 
 
   // LOGOUT-----------------------
@@ -92,7 +73,6 @@ function MainWithAuth({user, setUser}) {
       if (res.ok) {
         res.json().then((data) => {
           setDoctors(data.body);
-          
         });
       }
     });
@@ -104,6 +84,7 @@ function MainWithAuth({user, setUser}) {
       
         <NavBar
           logout={logout}
+          user={user}
         />
         <div className="covidWarnning">
           <ClinicGidlines />

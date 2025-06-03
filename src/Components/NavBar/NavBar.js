@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 import "./NavBar.css";
-import { UserContext } from "../../App"
 
-function NavBar({ logout }) {
+function NavBar({ logout, user }) {
   const auth = useAuth();
   const history = useNavigate();
-  const {user} = useContext(UserContext);
-
 
   function handlelogout(e) {
     e.preventDefault();
@@ -48,7 +44,7 @@ function NavBar({ logout }) {
                         <Link to="/appointments">All Apointments</Link>
                       </li>
                       <li>
-                        {user.role === "patient" ? (
+                        {user === "patient" ? (
                           <Link to="/newappointment">New Appointment</Link>
                         ) : (
                           ""
@@ -162,7 +158,7 @@ function NavBar({ logout }) {
         <div className="loggedUsername">
           <h6>
             {auth.isAuthenticated
-              ? `You are logged in as ${user.first_name}`
+              ? `You are logged in as ${auth.user?.profile.email}`
               : "🔑 Login to make an Appointment"}
           </h6>
         </div>

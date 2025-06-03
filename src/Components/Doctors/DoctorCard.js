@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BASE_URL from "../../constraints/URL";
 import "./DoctorCard.css";
 import StarRating from "./StarRating";
-import { UserContext } from "../../App"
+import { useAuth } from "react-oidc-context";
 
 function Doctor({ card }) {
-  const {user}=useContext(UserContext)
   const [comment, setComment] = useState(null);
-
+  const auth = useAuth();
+  
   useEffect(() => {
     fetch(BASE_URL + `/doctors/${card.id}`, {
       method: "GET",
@@ -16,8 +16,7 @@ function Doctor({ card }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
-          console.log(data);
-          setComment(data[0]? data[0]["comments"]: null);
+          setComment(data.body? data.body: null);
         });
       }
     });
@@ -88,14 +87,14 @@ function Doctor({ card }) {
       </Link>
       <div className="row commentRow">
         <div className="col col-sm-12 col-md-6">
-          <p>Ratings: {rating(comment)}</p>
+          <p>Ratings: {rating(comment.comments)}</p>
           <StarRating
-                  percentage={comment ? rating(comment) / 5 : 5 / 5}
+                  percentage={comment ? rating(comment.comments) / 5 : 5 / 5}
                 />
         </div>
         <div className="col col-sm-12 col-md-6 commentRowDiv2">
-          {user?.role ==="patient"?
-          <Link to={user?"/newappointment":"/patientlogin"}>
+          {auth.isAuthenticated?
+          <Link to={auth.isAuthenticated?"/newappointment":"/patientlogin"}>
             <button className="btn docCardBtn">Schedule an Appointment</button>
           </Link>:""}
         </div>
