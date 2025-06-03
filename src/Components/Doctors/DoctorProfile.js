@@ -1,34 +1,31 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 import BASE_URL from "../../constraints/URL";
 import StarRating from "./StarRating";
-import { UserContext } from "../../App"
 import "./DocProfile.css";
 
 function DoctorProfile({ user }) {
   const [docProfile, setDocProfile] = useState([]);
-  const [docLocations, setDocLocation] = useState([]);
   const [rate, setRate] = useState();
-
+  const auth = useAuth();
   const params = useParams();
-  const {doctors} = useContext(UserContext);
 
-  //-----------------GET Doctor----------------
 
-  useEffect(() => {
-     setDocProfile(doctors.find(ele => ele.id === params.id))
-  }, [params.id, doctors]);
-
-  //------------------GET Locations-------------
+  //-----------------GET Doctor with comments and locations----------------
 
   useEffect(() => {
-    fetch(BASE_URL + `/doctors/${params.id}/locations`, {
+    fetch(BASE_URL + `/doctors/${params.id}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
     })
       .then((r) => r.json())
-      .then((data) => setDocLocation(data[0]));
+      .then((data) => {
+        setDocProfile(data.body);
+      });
   }, [params.id]);
+
   //-------------POST a comment-----------------
 
   function handleNewComment(e) {
@@ -143,8 +140,8 @@ function DoctorProfile({ user }) {
             ""
           )}
 
-          {user?.role === "patient" ? (
-            <Link to={user ? "/newappointment" : "/"}>
+          {auth.isAuthenticated ? (
+            <Link to={auth.isAuthenticated ? "/newappointment" : "/"}>
               <button className="btn profileBtn">
                 Schedule an Appointment
               </button>
@@ -169,8 +166,8 @@ function DoctorProfile({ user }) {
       >
         <h5>Location and Contact Information</h5>
         <hr />
-        {docLocations?.length > 0 ? (
-          docLocations.map((location) => (
+        {docProfile.locations?.length > 0 ? (
+          docProfile.locations.map((location) => (
             <div className="row docAddressContactInfo" key={location.id}>
               <div className="col col-sm-12 col-md-4">
                 <p>
@@ -196,7 +193,7 @@ function DoctorProfile({ user }) {
         )}
       </div>
 
-      {user?.role === "patient" ? (
+      {auth.isAuthenticated ? (
         <div className="row">
           <h5>Write a Comment</h5>
           <hr />

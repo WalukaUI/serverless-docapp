@@ -10,14 +10,11 @@ import Locations from "./Locations/Locations";
 import Covid19 from "./Covid19/Covid19";
 import ClinicGidlines from "./Covid19/ClinicGuidlines";
 
-
-
 function MainWithoutAuth({user}) {
   const [doctors, setDoctors] = useState(null);
   const [locations, setLocations] = useState(null);
   const [getAddress, setAddress] = useState("");
   
-
   // LOGOUT-----------------------
 
   function logout() {
