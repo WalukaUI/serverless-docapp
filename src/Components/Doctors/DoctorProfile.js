@@ -7,6 +7,7 @@ import "./DocProfile.css";
 
 function DoctorProfile({ user }) {
   const [docProfile, setDocProfile] = useState([]);
+  const [docLocations, setDocLocation] = useState();
   const [rate, setRate] = useState();
   const auth = useAuth();
   const params = useParams();
@@ -18,11 +19,17 @@ function DoctorProfile({ user }) {
     fetch(BASE_URL + `/doctors/${params.id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
+      'authorization': auth.user?.access_token,
     })
       .then((r) => r.json())
       .then((data) => {
-        setDocProfile(data.body);
+        setDocLocation("")
+        setDocProfile(data);
+        let loc=[]
+        for (let i = 0; i < data.locations.length; i++) {
+          // const nn=alllocations.filter((e)=> e.id === data.locations[i].location_id)
+          
+        }
       });
   }, [params.id]);
 
@@ -164,7 +171,7 @@ function DoctorProfile({ user }) {
         id="about"
         style={{ minHeight: "150px" }}
       >
-        <h5>Location and Contact Information</h5>
+        {/* <h5>Location and Contact Information</h5>
         <hr />
         {docProfile.locations?.length > 0 ? (
           docProfile.locations.map((location) => (
@@ -191,7 +198,20 @@ function DoctorProfile({ user }) {
         ) : (
           <p>N/A</p>
         )}
+      </div> */}
+
+        <h5>Location and Contact Information</h5>
+        <hr />
+        {docLocations?.length > 0 ? (
+          docLocations.map((location) => {
+           return <h1>Hello, world!</h1>;
+          })
+        ) : (
+          <p>N/A</p>
+        )}
       </div>
+
+
 
       {auth.isAuthenticated ? (
         <div className="row">

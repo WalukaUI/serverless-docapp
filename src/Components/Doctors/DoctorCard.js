@@ -6,21 +6,22 @@ import StarRating from "./StarRating";
 import { useAuth } from "react-oidc-context";
 
 function Doctor({ card }) {
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState("");
   const auth = useAuth();
   
   useEffect(() => {
     fetch(BASE_URL + `/doctors/${card.id}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
+      headers: { "Content-Type": "application/json", 'Accept': 'application/json', 'authorization': auth.user?.access_token },
     }).then((res) => {
       if (res.ok) {
+        
         res.json().then((data) => {
-          setComment(data.body? data.body: null);
+          setComment(data? data: null);
         });
       }
     });
-  }, [card.id]);
+  }, [card]);
 
   function rating(array) {
     let points = [];

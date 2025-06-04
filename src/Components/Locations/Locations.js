@@ -43,6 +43,7 @@ function Locations({ locations }) {
                         >
                           {locations?.map((card)=>(
                           <AdvancedMarker 
+                          key={card.id}
                           position={{ lat: card.latitude, lng: card.longitude }} 
                           onClick={() => setSelectedPlace(card)}
                           ><img src={logo} width={32} height={32} alt="logo"/>

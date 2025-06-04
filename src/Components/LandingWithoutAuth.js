@@ -4,11 +4,13 @@ import "./Maindiv.css";
 import NavBar from "./NavBar/NavBar";
 import Footer from "./Footer/Footer";
 import Doctors from "./Doctors/Doctors";
+import DoctorProfile from "./Doctors/DoctorProfile";
 import Home from "./Home/Home";
 import BASE_URL from "../constraints/URL";
 import Locations from "./Locations/Locations";
 import Covid19 from "./Covid19/Covid19";
 import ClinicGidlines from "./Covid19/ClinicGuidlines";
+
 
 function MainWithoutAuth({user}) {
   const [doctors, setDoctors] = useState(null);
@@ -69,7 +71,9 @@ function MainWithoutAuth({user}) {
             path="/doctors"
             element={<Doctors doctors={doctors} user={user} />}
           />
-          <Route path="/doctors/:id"/>
+          
+          <Route path="/doctors/:id" element={<DoctorProfile/>} user={user}/>
+          
           <Route path="/" element={<Home />} />
         </Routes>
         <Footer />
