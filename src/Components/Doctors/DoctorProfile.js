@@ -25,11 +25,11 @@ function DoctorProfile({ user }) {
       .then((data) => {
         setDocLocation("")
         setDocProfile(data);
-        let loc=[]
-        for (let i = 0; i < data.locations.length; i++) {
-          // const nn=alllocations.filter((e)=> e.id === data.locations[i].location_id)
+        // let loc=[]
+        // for (let i = 0; i < data.locations.length; i++) {
+        //   // const nn=alllocations.filter((e)=> e.id === data.locations[i].location_id)
           
-        }
+        // }
       });
   }, [params.id]);
 
@@ -37,24 +37,25 @@ function DoctorProfile({ user }) {
 
   function handleNewComment(e) {
     e.preventDefault();
-    let ss = document.getElementById("commentTextarea").value;
+    let commentText = document.getElementById("commentTextarea").value;
     let obj = {
-      comment: `${ss}`,
-      doctor_id: parseInt(params.id),
-      patient_id: user.id,
+      comment: `${commentText}`,
+      doctor_id: parseInt(docProfile.id),
+      patient_id: parseInt(user.id),
       points: rate,
     };
-
     fetch(BASE_URL + `/comments`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", 'Accept': 'application/json'
+        "Content-Type": "application/json", 
+        'Accept': 'application/json',
+        'authorization': auth.user?.access_token,
       },
       body: JSON.stringify(obj),
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
-          fetch(`/doctors/${params.id}`, {
+          fetch(BASE_URL +`/doctors/${params.id}`, {
             method: "GET",
             headers: { "Content-Type": "application/json", 'Accept': 'application/json' },
           })

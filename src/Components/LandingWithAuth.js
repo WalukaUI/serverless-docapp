@@ -27,6 +27,7 @@ function MainWithAuth({user, setUser}) {
 
   const userRole = localStorage.getItem("role");
   localStorage.setItem("email", auth.user?.profile.email);
+  localStorage.setItem("role", "patient");
 
   // auto-login----------------------
   useEffect(() => { 

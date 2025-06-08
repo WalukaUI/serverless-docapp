@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 import "./Appointments.css";
 import BASE_URL from "../../constraints/URL";
 import AppointmentCard from "./AppointmentCard";
 
 function Appointments({ user, appointments, setAppoinements, doctors}) {
   const[serchTearm,setSearchTearm]=useState(null)
-
+  const auth = useAuth();
   //GET Appointments-------------------------
   useEffect(() => {
-    fetch(user?.role === "patient"? `${BASE_URL}/patients/${user?.id}/appointments`
+    fetch(user?.role === "patient"? `${BASE_URL}/patients/${user?.id}`
         : `${BASE_URL}/doctors/${user?.id}/appointments`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "Authorization": auth.user?.access_token,
+         },
       }
     ).then((res) => {
       if (res.ok) {
@@ -49,7 +52,6 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
     }).then((res)=>{
       if(res.ok){
         res.json().then((obj)=>{
-          console.log(obj);
           const newData = appointments.filter((app) => app.id !== data.id);
           setAppoinements([...newData, obj]);
         })

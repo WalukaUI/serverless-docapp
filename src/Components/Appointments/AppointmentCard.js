@@ -67,7 +67,7 @@ function AppointmentCard({
       <div className=" row appointmentCard">
         <div className="col col-md-6 col-sm-12">
           <p>
-            <b>Date:</b> {card.date}
+            <b>Date:</b> {card.date.split("T")[0]}
           </p>
           <p>
             <b>Time:</b>{taketime2()}

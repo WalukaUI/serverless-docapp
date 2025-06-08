@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 import "./NewAppointment.css";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
@@ -11,6 +12,7 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
   const [errors, setErrors] = useState(null);
   const [searchTearm, setSearchTearm] = useState("");
   const [selected, setSelectedDate] = useState(null);
+  const auth = useAuth();
 
   const history = useNavigate();
   const form = useRef();
@@ -23,6 +25,7 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": auth.user?.access_token,
       },
       body: JSON.stringify(newAppointment),
     }).then((res) => {
@@ -33,7 +36,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
         });
       } else {
         res.json().then((err) => {
-          console.log(err.errors);
           setErrors(err.errors);
         });
       }
