@@ -21,6 +21,8 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(newAppointment);
+    
     await fetch(BASE_URL + `/appointments`, {
       method: "POST",
       headers: {
@@ -31,6 +33,8 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((booking) => {
+          console.log(booking);
+          
           setAppoinements([...appointments, booking]);
           history("/appointments");
         });

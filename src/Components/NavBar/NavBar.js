@@ -138,20 +138,14 @@ function NavBar({ logout, user }) {
            🔐 Log Out
           </Link>
         ) : (
-         
-          <button
-            className="btn btn-outline-primary styled-button"
-            onClick={() => auth.signinRedirect()}
-          >
-            Doctor Log in
-          </button> 
-        )}
         <button
           className={auth.isAuthenticated ? "changeDisplay" : "btn btn-primary styled-button"}
           onClick={() => auth.signinRedirect()}
         >
           Patient Sign In
         </button>
+        )}
+
       </div>
 
       <div className="loginLogoutDiv">
