@@ -16,7 +16,7 @@ import PatientProfile from "./Profile/PatientProfile";
 import DocProfile from "./Profile/DocProfile";
 import Covid19 from "./Covid19/Covid19";
 import ClinicGidlines from "./Covid19/ClinicGuidlines";
-import LogoutLandingPage from "./Login/LogOutPage";
+
 
 function MainWithAuth({user, setUser}) {
   const auth = useAuth();
@@ -93,10 +93,6 @@ function MainWithAuth({user, setUser}) {
 
         <Routes>
           <Route path="/covid19" element={<Covid19 />} />
-          <Route
-            path="/LogoutLandingPage"
-            element={<LogoutLandingPage/>}
-          />
           <Route
             path="/locations"
             element={<Locations locations={locations?.filter ((card)=>card.name !== "Club Hills")} />}

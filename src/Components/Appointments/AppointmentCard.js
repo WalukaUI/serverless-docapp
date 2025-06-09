@@ -43,6 +43,9 @@ function AppointmentCard({
   function handleEdit(e) {
     e.preventDefault();
     setDisplay(!display);
+    console.log("---------------");
+    console.log({ ...updatedAppointment, date: selected.toISOString()})
+    console.log("---------------");
     editAppointment({ ...updatedAppointment, date: selected });
   }
 
@@ -67,7 +70,7 @@ function AppointmentCard({
       <div className=" row appointmentCard">
         <div className="col col-md-6 col-sm-12">
           <p>
-            <b>Date:</b> {card.date.split("T")[0]}
+            <b>Date:</b> {card.date.includes("T")?card.date.split("T")[0]: card.date}
           </p>
           <p>
             <b>Time:</b>{taketime2()}
@@ -122,13 +125,19 @@ function AppointmentCard({
                 </select>
                 <label>Select a Date</label>
                 <div>
-                <DayPicker selected={selected} 
+                {/* <DayPicker selected={selected} 
                 className="form-select" 
                 dateFormat="dd/MM/yy" 
                 name="date" 
                 onChange={(date) => setSelectedDate(date)} 
                 filterDate={(date)=>date.getDay() !== 6 && date.getDay() !== 0}
-                />
+                /> */}
+                <DayPicker mode="single" 
+                selected={selected} 
+                className="form-select" 
+                dateFormat="dd/MM/yy" 
+                name="date" onSelect={(date) => setSelectedDate(date)} 
+                footer={selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."}/>
                 </div>
                 <label>Time</label>
                 <select

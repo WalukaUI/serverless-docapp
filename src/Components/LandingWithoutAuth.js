@@ -10,6 +10,7 @@ import BASE_URL from "../constraints/URL";
 import Locations from "./Locations/Locations";
 import Covid19 from "./Covid19/Covid19";
 import ClinicGidlines from "./Covid19/ClinicGuidlines";
+import LogoutLandingPage from "./Login/LogOutPage";
 
 
 function MainWithoutAuth({user}) {
@@ -63,6 +64,10 @@ function MainWithoutAuth({user}) {
         </div>
         <Routes>
           <Route path="/covid19" element={<Covid19 />} />
+          <Route
+            path="/LogoutLandingPage"
+            element={<LogoutLandingPage/>}
+          />
           <Route
             path="/locations"
             element={<Locations locations={locations?.filter ((card)=>card.name !== "Club Hills")} />}

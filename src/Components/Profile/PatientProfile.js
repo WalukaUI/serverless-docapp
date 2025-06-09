@@ -37,7 +37,6 @@ function PatientProfile({ user, appointments, locations, setUser }) {
   }
 
   //show user appointments--------------------
-  console.log(user)
   function showUserAppointments(id) {
     let appointment = appointments?.map((card) => card.patient_id === id);
     return appointment ? (

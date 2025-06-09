@@ -21,7 +21,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(newAppointment);
     
     await fetch(BASE_URL + `/appointments`, {
       method: "POST",
@@ -33,7 +32,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((booking) => {
-          console.log(booking);
           
           setAppoinements([...appointments, booking]);
           history("/appointments");
@@ -107,7 +105,7 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
           ))}
       </div>
       <div className="col col-sm-12 col-md-6">
-      <div className="newAppointmentFormContainer">
+      <div className="newAppointmentFormContainer" style={{paddingTop:"8%"}}>
         <form ref={form} onSubmit={handleSubmit}>
           <div className="form-group newAppointmentForm">
             <h4 style={{ color: "#00235B", paddingBottom: "20px" }} >Create a new Appointment</h4>
@@ -136,7 +134,12 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
             />
             <label>Select a Date</label>
             <div>
-            <DayPicker mode="single" selected={selected} className="form-select" dateFormat="dd/MM/yy" name="date" onSelect={(date) => setSelectedDate(date)} footer={selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."}/>
+            <DayPicker mode="single" 
+            selected={selected} 
+            className="form-select" 
+            dateFormat="dd/MM/yy" 
+            name="date" onSelect={(date) => setSelectedDate(date)} 
+            footer={selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."}/>
             </div>
             <label>Time</label>
             <select

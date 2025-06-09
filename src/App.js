@@ -8,13 +8,6 @@ function App() {
   const auth = useAuth();
   const [user, setUser] = useState();
 
-  const signOutRedirect = () => {
-    const clientId = "2kih0h4ra0c1ognli9tomv1hs7";
-    const logoutUri = "https://main.d11x0rh1r8wz2j.amplifyapp.com";
-    const cognitoDomain = "https://us-east-2smuhwfuds.auth.us-east-2.amazoncognito.com";
-    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
-  };
-
   if (auth.isLoading) {
     return <div>Loading...</div>;
   }
@@ -38,7 +31,6 @@ function App() {
   return (
     <div>
       <MainWithoutAuth/>
-      <button onClick={() => signOutRedirect()}>Sign out</button>
     </div>
   );
 }

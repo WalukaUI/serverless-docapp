@@ -45,13 +45,16 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
     fetch(BASE_URL + `/appointments/${data.id}`, {
       method: "PATCH",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
+        "Authorization": auth.user?.access_token,
       },
       body: JSON.stringify(data),
     }).then((res)=>{
       if(res.ok){
+        console.log(res);
         res.json().then((obj)=>{
+          console.log(obj);
+          
           const newData = appointments.filter((app) => app.id !== data.id);
           setAppoinements([...newData, obj]);
         })
