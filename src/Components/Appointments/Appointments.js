@@ -51,10 +51,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
       body: JSON.stringify(data),
     }).then((res)=>{
       if(res.ok){
-        console.log(res);
         res.json().then((obj)=>{
-          console.log(obj);
-          
           const newData = appointments.filter((app) => app.id !== data.id);
           setAppoinements([...newData, obj]);
         })

@@ -43,9 +43,6 @@ function AppointmentCard({
   function handleEdit(e) {
     e.preventDefault();
     setDisplay(!display);
-    console.log("---------------");
-    console.log({ ...updatedAppointment, date: selected.toISOString()})
-    console.log("---------------");
     editAppointment({ ...updatedAppointment, date: selected });
   }
 
