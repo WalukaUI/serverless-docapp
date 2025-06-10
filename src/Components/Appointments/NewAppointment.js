@@ -8,7 +8,7 @@ import BASE_URL from "../../constraints/URL";
 
 
 function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
-  const [newAppointment, setNewAppointment] = useState({});
+  const [newAppointment, setNewAppointment] = useState({doctor_id: "12", time: "1100"});
   const [errors, setErrors] = useState(null);
   const [searchTearm, setSearchTearm] = useState("");
   const [selected, setSelectedDate] = useState(null);
@@ -21,26 +21,27 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log(newAppointment);
     
-    await fetch(BASE_URL + `/appointments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": auth.user?.access_token,
-      },
-      body: JSON.stringify(newAppointment),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((booking) => {
-          setAppoinements([...appointments, booking]);
-          history("/appointments");
-        });
-      } else {
-        res.json().then((err) => {
-          setErrors(err.errors);
-        });
-      }
-    });
+    // await fetch(BASE_URL + `/appointments`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Authorization": auth.user?.access_token,
+    //   },
+    //   body: JSON.stringify(newAppointment),
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     res.json().then((booking) => {
+    //       setAppoinements([...appointments, booking]);
+    //       history("/appointments");
+    //     });
+    //   } else {
+    //     res.json().then((err) => {
+    //       setErrors(err.errors);
+    //     });
+    //   }
+    // });
   }
 
   //Supportive Functions----------------------
@@ -115,7 +116,9 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
               aria-label="Default select example"
               onChange={handleNewAppointment}
             >
+              <option value="All"></option>
               {doctors.map((card) => (
+
                 <option value={card.id} key={card.id}>
                   {card.first_name} {card.last_name}
                 </option>
@@ -147,6 +150,7 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
               onChange={handleNewAppointment}
               disabled={!selected}
             >
+              <option value=""></option>
               <option value={1000}>10.00 am</option>
               <option value={1030}>10.30 am</option>
               <option value={1100}>11.00 am</option>

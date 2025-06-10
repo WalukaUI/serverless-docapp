@@ -15,8 +15,6 @@ function AppointmentCard({
   const [display, setDisplay] = useState(true);
   const [selected, setSelectedDate] = useState(null);
 
-  console.log(card);
-
   function filterDoctorName() {
     let filteredDoc = doctors.filter((doc) => doc.id === card.doctor_id);
     if(filteredDoc.length > 0){
