@@ -10,6 +10,7 @@ function Doctor({ card }) {
   const auth = useAuth();
   
   useEffect(() => {
+    if(card.id !== undefined){
     fetch(BASE_URL + `/doctors/${card.id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json", 'Accept': 'application/json', 'authorization': auth.user?.access_token },
@@ -20,7 +21,8 @@ function Doctor({ card }) {
           setComment(data? data: null);
         });
       }
-    });
+    })
+  }
   }, [card]);
 
   function rating(array) {

@@ -17,9 +17,13 @@ function AppointmentCard({
 
   function filterDoctorName() {
     let filteredDoc = doctors.filter((doc) => doc.id === card.doctor_id);
+    if(filteredDoc.length > 0){
     let fname = filteredDoc[0].first_name;
     let lname = filteredDoc[0].last_name;
     return fname + " " + lname;
+    }
+    return "N/A"
+
   }
   function handleDelete(e) {
     e.preventDefault();
@@ -45,7 +49,13 @@ function AppointmentCard({
     setDisplay(!display);
     editAppointment({ ...updatedAppointment, date: selected });
   }
-
+  
+  function handleDate() {
+    if(card.date !== undefined){
+        return card.date.includes("T")?card.date.split("T")[0]: card.date
+    }
+    return "N/A"
+  }
   function taketime2(){
     var number= card.time
     var output = [];
@@ -67,7 +77,7 @@ function AppointmentCard({
       <div className=" row appointmentCard">
         <div className="col col-md-6 col-sm-12">
           <p>
-            <b>Date:</b> {card.date.includes("T")?card.date.split("T")[0]: card.date}
+            <b>Date:</b> {handleDate()}
           </p>
           <p>
             <b>Time:</b>{taketime2()}

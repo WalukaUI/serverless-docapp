@@ -56,9 +56,6 @@ function PatientProfile({ user, appointments, locations, setUser }) {
   function showUserClinicName(id) {
     let currentLocation = [];
     locations.map((card) => (card.id === id ? currentLocation.push(card.name) : null));
-    console.log(locations);
-    
-    console.log(currentLocation);
     return currentLocation[0];
   }
   //Supportive Functions------------------------
