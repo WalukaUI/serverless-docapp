@@ -45,7 +45,7 @@ function MainWithAuth({user, setUser}) {
 
    },[]);
 
-
+  console.log("111111111111111111111111111111111111with");
   // LOGOUT-----------------------
 
   function logout() {

@@ -10,7 +10,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
   const auth = useAuth();
   //GET Appointments-------------------------
   useEffect(() => {
-    if(user.id !== undefined){
+    if(user?.id !== undefined){
     fetch(user?.role === "patient"? `${BASE_URL}/patients/${user?.id}`
         : `${BASE_URL}/doctors/${user?.id}/appointments`,
       {

@@ -32,7 +32,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((booking) => {
-          
           setAppoinements([...appointments, booking]);
           history("/appointments");
         });

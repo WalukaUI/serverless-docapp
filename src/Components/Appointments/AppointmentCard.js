@@ -15,6 +15,8 @@ function AppointmentCard({
   const [display, setDisplay] = useState(true);
   const [selected, setSelectedDate] = useState(null);
 
+  console.log(card);
+
   function filterDoctorName() {
     let filteredDoc = doctors.filter((doc) => doc.id === card.doctor_id);
     if(filteredDoc.length > 0){
@@ -132,13 +134,6 @@ function AppointmentCard({
                 </select>
                 <label>Select a Date</label>
                 <div>
-                {/* <DayPicker selected={selected} 
-                className="form-select" 
-                dateFormat="dd/MM/yy" 
-                name="date" 
-                onChange={(date) => setSelectedDate(date)} 
-                filterDate={(date)=>date.getDay() !== 6 && date.getDay() !== 0}
-                /> */}
                 <DayPicker mode="single" 
                 selected={selected} 
                 className="form-select" 
