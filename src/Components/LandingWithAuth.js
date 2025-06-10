@@ -37,8 +37,8 @@ function MainWithAuth({user, setUser}) {
       body: JSON.stringify({"email": `${auth.user?.profile.email}`}),
     }).then((r)=>{
       if(r.ok){
-        r.json().then((user)=>{
-          setUser(user.body);
+        r.json().then((patientProfile)=>{
+          setUser(patientProfile.body);
         })
       }
     })

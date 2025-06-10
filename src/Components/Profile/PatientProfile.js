@@ -15,10 +15,9 @@ function PatientProfile({ user, appointments, locations, setUser }) {
   function triggerEdit(e) {
     e.preventDefault();
     setPopup(!popup);
-    fetch(BASE_URL + `/patients/${user.id}`, {
+    fetch(BASE_URL + `/patients`, {
       method: "PATCH",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
         "Authorization": auth.user?.id_token,
       },
@@ -26,7 +25,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
     }).then((res) => {
       if (res.ok) {
         res.json().then((patient) => {
-          setUser(patient)
+          setUser(patient.body)
         });
       } else {
         res.json().then((err) => {
@@ -55,9 +54,12 @@ function PatientProfile({ user, appointments, locations, setUser }) {
   //show users clinic location---------------
 
   function showUserClinicName(id) {
-    let nn = [];
-    locations.map((card) => (card.id === id ? nn.push(card.name) : null));
-    return nn[0];
+    let currentLocation = [];
+    locations.map((card) => (card.id === id ? currentLocation.push(card.name) : null));
+    console.log(locations);
+    
+    console.log(currentLocation);
+    return currentLocation[0];
   }
   //Supportive Functions------------------------
   function triggerEditWindow(e) {
@@ -114,20 +116,6 @@ function PatientProfile({ user, appointments, locations, setUser }) {
               )}
             
             </div>
-            <div style={{display: "flex"}}>
-            <p>
-              <b>User name :</b></p>
-              {popup ? (
-                <label><input
-                class="form-control"
-                  value={user.username ? editUser.username : "N/A"}
-                  name="username"
-                  onChange={handleChange}
-                /></label>
-              ) : (
-                user.username ? user.username: "N/A"
-              )}
-            </div>
             <p>
               <b>Clinic Location :</b>
               {popup ? (
@@ -149,7 +137,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
                   </select>
                 </label>
               ) : (
-                 user.clinic_location? showUserClinicName(parseInt(user.clinic_location)): "N/A"
+                 user.clinic_location? showUserClinicName(user.clinic_location): "N/A"
               )}
             </p>
           </div>

@@ -15,6 +15,7 @@ const cognitoAuthConfig = {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // https://main.d11x0rh1r8wz2j.amplifyapp.com
+//http://localhost:3000
 // wrap the application with AuthProvider
 root.render(
   <React.StrictMode>
