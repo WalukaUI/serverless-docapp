@@ -64,7 +64,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
       }
     })
   }
-
+  
   function handleSearch(e) {
     e.preventDefault();
     if(e.target.value === "All"){
@@ -74,7 +74,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
       setSearchTearm(value)
     }
   }
- 
+  
   function getNamesOfPatients() {
     return appointments.map(e => <option value={e.patient.id} key={e.patient.id+21}>{e.patient.first_name + " " + e.patient.last_name}</option>
     );
@@ -158,10 +158,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
           )}
         </div>
 
-        {appointments?.length !== 0 ?
-        appointments.filter((card)=> serchTearm !== null ? 
-        
-        user?.role === "patient"? card.doctor_id === parseInt(serchTearm):card.patient.id=== parseInt(serchTearm)
+        { appointments.length > 0  ? appointments.filter((card)=> serchTearm !== null ? user?.role === "patient"? card.doctor_id === parseInt(serchTearm):card.patient.id=== parseInt(serchTearm)
         : card)
         .map((card) => {
           return <AppointmentCard
@@ -173,7 +170,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
             doctors={doctors}
             editAppointment={editAppointment}
           />
-         }): ""
+         }) : ""
         }
       </div>
     </div>
