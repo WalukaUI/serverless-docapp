@@ -158,7 +158,8 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
           )}
         </div>
 
-        {appointments?.filter((card)=> serchTearm !== null ? 
+        {appointments?.length !== 0 ?
+        appointments.filter((card)=> serchTearm !== null ? 
         
         user?.role === "patient"? card.doctor_id === parseInt(serchTearm):card.patient.id=== parseInt(serchTearm)
         : card)
@@ -172,7 +173,8 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
             doctors={doctors}
             editAppointment={editAppointment}
           />
-})}
+         }): ""
+        }
       </div>
     </div>
   );
