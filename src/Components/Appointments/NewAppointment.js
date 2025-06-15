@@ -21,8 +21,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(newAppointment);
-    
     await fetch(BASE_URL + `/appointments`, {
       method: "POST",
       headers: {

@@ -33,7 +33,7 @@ function MainWithAuth({user, setUser}) {
   useEffect(() => { 
     fetch(BASE_URL + `/patients`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": auth.user?.access_token},
+      headers: { "Content-Type": "application/json", "Authorization": auth.user?.id_token},
       body: JSON.stringify({"email": `${auth.user?.profile.email}`}),
     }).then((r)=>{
       if(r.ok){

@@ -16,7 +16,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
       {
         method: "GET",
         headers: { "Content-Type": "application/json",
-          "Authorization": auth.user?.access_token,
+          "Authorization": auth.user?.id_token,
          },
       }
     ).then((res) => {
@@ -34,6 +34,9 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
   function deleteAppointment(id) {
     fetch(BASE_URL + `/appointments/${id}`, {
       method: "DELETE",
+      headers: {
+        "Authorization": auth.user?.id_token,
+      },
     });
     const newAppointmentsList = appointments.filter(
       (appointment) => appointment.id !== id
@@ -48,7 +51,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": auth.user?.access_token,
+        "Authorization": auth.user?.id_token,
       },
       body: JSON.stringify(data),
     }).then((res)=>{
