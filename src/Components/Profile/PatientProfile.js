@@ -89,7 +89,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
               <b>First Name :</b></p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={editUser.first_name}
                   name="first_name"
                   onChange={handleChange}
@@ -103,7 +103,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
               <b>Last Name :</b></p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={editUser.last_name }
                   name="last_name"
                   onChange={handleChange}
@@ -144,7 +144,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
               <b>Contact Number:</b>{" "}</p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={editUser?.contact_number}
                   name="contact_number"
                   onChange={handleChange}
@@ -158,7 +158,7 @@ function PatientProfile({ user, appointments, locations, setUser }) {
               <b>Email Address:</b>{" "}</p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={editUser.email}
                   name="email"
                   onChange={handleChange}

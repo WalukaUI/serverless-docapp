@@ -35,6 +35,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
     fetch(BASE_URL + `/appointments/${id}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         "Authorization": auth.user?.id_token,
       },
     });

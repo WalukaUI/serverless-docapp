@@ -77,7 +77,7 @@ function DocProfile({ user, appointments, setUser }) {
               <p><b>First Name :</b></p> <label>
               {popup ? (
                 <input
-                class="form-control"
+                className="form-control"
                   value={editUser.first_name}
                   name="first_name"
                   onChange={handleChange}
@@ -92,7 +92,7 @@ function DocProfile({ user, appointments, setUser }) {
               {popup ? (
                 <label>
                 <input
-                class="form-control"
+                className="form-control"
                   value={editUser.last_name }
                   name="last_name"
                   onChange={handleChange}
@@ -107,7 +107,7 @@ function DocProfile({ user, appointments, setUser }) {
               {popup ? (
                 <label>
                 <input
-                class="form-control"
+                className="form-control"
                   value={user?.email}
                   name="email"
                   onChange={handleChange}
@@ -122,7 +122,7 @@ function DocProfile({ user, appointments, setUser }) {
               <b>Education :</b></p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={user?.education}
                   name="education"
                   onChange={handleChange}
@@ -139,7 +139,7 @@ function DocProfile({ user, appointments, setUser }) {
               <b>Username:</b>{" "}</p>
               {popup ? (
                 <label><input
-                class="form-control"
+                className="form-control"
                   value={editUser?.username}
                   name="username"
                   onChange={handleChange}
