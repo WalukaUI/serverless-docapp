@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import BASE_URL from "../../constraints/URL";
 import PatientCard from "./PatientCard";
 import CardLoadAnimation from "../Doctors/DocCardLoading";
+import { useAuth } from "react-oidc-context";
 import "./Patients.css";
 
 function Patients({ locations, user }) {
+  const auth = useAuth();
   const [patients, setPatients] = useState(null);
   const [editBtn, setEditBtn] = useState(false);
   const [searchTearm, setSearchTearm] = useState("");
@@ -15,7 +17,9 @@ function Patients({ locations, user }) {
   useEffect(() => {
     fetch(BASE_URL + `/doctors/${user?.id}/patients`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          "Authorization": auth.user?.id_token,
+         },
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
@@ -30,6 +34,8 @@ function Patients({ locations, user }) {
   function deletePatient(id) {
     fetch(BASE_URL + `/patients/${id}`, {
       method: "DELETE",
+      headers: { "Authorization": auth.user?.id_token,
+         },
     });
     const newPatientsList = patients.filter((person) => person.id !== id);
     setPatients(newPatientsList);
@@ -45,6 +51,7 @@ function Patients({ locations, user }) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Authorization": auth.user?.id_token,
       },
       body: JSON.stringify(patientObject),
     }).then((res) => {
