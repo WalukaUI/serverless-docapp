@@ -22,6 +22,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
     ).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
+          console.log(data)
           setAppoinements(data);
         });
       }
