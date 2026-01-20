@@ -25,7 +25,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //"Authorization": auth.user?.access_token,
         "Authorization": auth.user?.id_token,
       },
       body: JSON.stringify(newAppointment),
@@ -33,7 +32,6 @@ function NewAppiontment({ doctors, user, setAppoinements, appointments }) {
       if (res.ok) {
         res.json().then((booking) => {
           setAppoinements([...appointments, booking]);
-          console.log(res)
           history("/appointments");
         });
       } else {

@@ -38,7 +38,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
         "Content-Type": "application/json",
         "Authorization": auth.user?.id_token,
       },
-    });
+    })
     const newAppointmentsList = appointments.filter(
       (appointment) => appointment.id !== id
     );
