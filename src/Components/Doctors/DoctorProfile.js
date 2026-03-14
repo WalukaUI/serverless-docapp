@@ -25,11 +25,6 @@ function DoctorProfile({ user }) {
       .then((data) => {
         setDocLocation("")
         setDocProfile(data);
-        // let loc=[]
-        // for (let i = 0; i < data.locations.length; i++) {
-        //   // const nn=alllocations.filter((e)=> e.id === data.locations[i].location_id)
-          
-        // }
       });
   }, [params.id]);
 
@@ -108,13 +103,13 @@ function DoctorProfile({ user }) {
           </h5>
           <p>Speciality: {docProfile.speciality}</p>
           <div>
-            <h6>Average Ratings: {rating(docProfile.comments)}</h6>
+            <h6>Average Ratings: {rating(docProfile.comment)}</h6>
             <StarRating
-                  percentage={docProfile.comments ? rating(docProfile.comments) / 5 : 5 / 5}
+                  percentage={docProfile.comment ? rating(docProfile.comment) / 5 : 5 / 5}
                 />
             <p>
-              {docProfile.comments?.length}{" "}
-              {docProfile.comments?.length > 1 ? "comments" : "comment"}
+              {docProfile.comment?.length}{" "}
+              {docProfile.comment?.length > 1 ? "comments" : "comment"}
             </p>
             <a href="#patientRatings">Comments & Ratings</a>
           </div>
@@ -253,8 +248,8 @@ function DoctorProfile({ user }) {
       <div className="row" style={{ backgroundColor: "#D6DFC6" }}>
         <h5 id="patientRatings">Doctor Ratings and Comments</h5>
         <hr />
-        {docProfile.comments?.length > 0 ? (
-          docProfile.comments.map((card) => (
+        {docProfile.comment?.length > 0 ? (
+          docProfile.comment.map((card) => (
             <div key={card.id}>
               <div>
                 <h6>Rating</h6>

@@ -6,7 +6,7 @@ import StarRating from "./StarRating";
 import { useAuth } from "react-oidc-context";
 
 function Doctor({ card }) {
-  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState("");
   const auth = useAuth();
   
   useEffect(() => {
@@ -18,7 +18,7 @@ function Doctor({ card }) {
       if (res.ok) {
         
         res.json().then((data) => {
-          setComment(data? data: null);
+          setComments(data? data: null);
         });
       }
     })
@@ -90,9 +90,9 @@ function Doctor({ card }) {
       </Link>
       <div className="row commentRow">
         <div className="col col-sm-12 col-md-6">
-          <p>Ratings: {comment?.comments ? rating(comment.comments): ""}</p>
+          <p>Ratings: {comments?.comment ? rating(comments.comment): ""}</p>
           <StarRating
-                  percentage={comment?.comments ? rating(comment.comments) / 5 : 5 / 5}
+                  percentage={comments?.comment ? rating(comments.comment) / 5 : 5 / 5}
                 />
         </div>
         <div className="col col-sm-12 col-md-6 commentRowDiv2">

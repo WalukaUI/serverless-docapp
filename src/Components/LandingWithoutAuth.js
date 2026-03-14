@@ -46,6 +46,7 @@ function MainWithoutAuth({user}) {
       if (res.ok) {
         res.json().then((data) => {
           setDoctors(data.body);
+
         });
       }
     });

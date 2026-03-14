@@ -61,6 +61,8 @@ function MainWithAuth({user, setUser}) {
     })
       .then((r) => r.json())
       .then((data) => {
+        console.log(data);
+        
         setLocations(data.body)});
   }, []);
 
