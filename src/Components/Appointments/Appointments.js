@@ -11,7 +11,7 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
   //GET Appointments-------------------------
   useEffect(() => {
     if(user?.id !== undefined){
-    fetch(user?.role === "patient"? `${BASE_URL}/patients/${user?.id}`
+    fetch(user?.role === "patient"? `${BASE_URL}/patients/${user?.id}/appointments`
         : `${BASE_URL}/doctors/${user?.id}/appointments`,
       {
         method: "GET",
