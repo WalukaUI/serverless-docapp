@@ -31,16 +31,21 @@ function Appointments({ user, appointments, setAppoinements, doctors}) {
 
   //DELETE Appointment-----------------------
 
-  function deleteAppointment(id) {
-    fetch(BASE_URL + `/appointments/${id}`, {
+  function deleteAppointment(card) {
+    fetch(BASE_URL + `/appointments/${card.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
         "Authorization": auth.user?.id_token,
       },
+      body: JSON.stringify({
+      doctor_id: card.doctor_id, // Passed over to stringified body
+      date: card.date
+    }),
     })
     const newAppointmentsList = appointments.filter(
-      (appointment) => appointment.id !== id
+      (appointment) => appointment.id !== card.id
     );
     setAppoinements(newAppointmentsList);
   }

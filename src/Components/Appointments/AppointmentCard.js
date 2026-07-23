@@ -27,7 +27,7 @@ function AppointmentCard({
   }
   function handleDelete(e) {
     e.preventDefault();
-    deleteAppointment(card.id);
+    deleteAppointment(card);
   }
 
   function handleEditAppointment(e) {
